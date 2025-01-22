@@ -1,11 +1,9 @@
-
+import AuthForm from "@/widgets/authForm/authForm"
 
 export default function Auth() {
     return (
-        <div>
-            <main>
-
-            </main>
-        </div>
+        <main>
+            <AuthForm></AuthForm>
+        </main>
     );
 }

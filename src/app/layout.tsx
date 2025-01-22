@@ -22,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${onestSans.className}`}>
-        <HeaderApp></HeaderApp>
-        {children}
+        <section className="container">
+          <HeaderApp></HeaderApp>
+          {children}
+        </section>
       </body>
     </html>
   );

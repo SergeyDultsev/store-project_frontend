@@ -1,2 +1,10 @@
 @use "reset";
 @use "variables";
+
+.container{
+  display: flex;
+}
+
+main{
+  margin: 0 auto;
+}
