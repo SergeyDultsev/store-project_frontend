@@ -1,8 +1,8 @@
-import styles from './header.module.scss';
+import styles from './headerApp.module.scss';
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Header() {
+export default function headerApp() {
     return (
         <header className={styles['header']}>
             <nav className={styles['header__nav']}>
