@@ -1,7 +1,10 @@
 import styles from './inputApp.module.scss'
 
-export default function inputApp({ type, placeholder }) {
+export default function InputApp({ type, placeholder }) {
     return (
-        <input type={type} placeholder={placeholder} className={styles['input-default']}/>
+        <input
+            type={type}
+            placeholder={placeholder}
+            className={styles['input-default']}/>
     );
 }

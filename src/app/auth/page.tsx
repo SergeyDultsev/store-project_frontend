@@ -1,6 +1,6 @@
-import AuthForm from "@/widgets/auth/authForm"
+import AuthForm from "@/widgets/authorization/authorization"
 
-export default function auth() {
+export default function Auth() {
     return (
         <main>
             <AuthForm></AuthForm>

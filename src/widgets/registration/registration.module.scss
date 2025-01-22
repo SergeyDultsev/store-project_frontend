@@ -1,0 +1,33 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+}
+
+.form__title{
+  text-align: center;
+  color: var(--main-color);
+}
+
+.form__inputs{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form__link{
+  font-size: 14px;
+  text-align: center;
+  color: var(--main-color);
+
+  &:hover{
+    text-decoration: underline;
+  }
+}

@@ -1,6 +1,6 @@
-import RegisterForm from "@/widgets/auth/registerForm";
+import RegisterForm from "@/widgets/registration/registration";
 
-export default function register() {
+export default function Register() {
     return (
         <main>
             <RegisterForm></RegisterForm>
