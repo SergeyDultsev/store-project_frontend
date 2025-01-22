@@ -1,6 +1,10 @@
 @use "reset";
 @use "variables";
 
+body{
+  position: relative;
+}
+
 .app-wrapper{
   display: flex;
   height: 100vh;

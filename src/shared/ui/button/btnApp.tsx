@@ -1,12 +1,17 @@
 import styles from './btnApp.module.scss'
 
-export default function BtnApp({ text, type, onClick, className = "", ...rest }) {
+type propsBtn = {
+    type: "button" | "submit" | "reset";
+    text: string;
+    onClick: () => void;
+}
+
+export default function BtnApp({ text, type, onClick }) {
     return (
         <button
             type={type}
             onClick={onClick}
             className={styles['btn-default']}
-            {...rest}
         >{ text }</button>
     );
 }

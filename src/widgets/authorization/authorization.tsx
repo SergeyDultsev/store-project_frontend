@@ -10,7 +10,7 @@ export default function Authorization() {
 
             <InputApp type="email" placeholder="Ваш Email"/>
             <InputApp type="password" placeholder="Ваш пароль"/>
-            <ButtonApp text="Авторизоваться" type={"submit"}/>
+            <ButtonApp text="Авторизоваться" type="submit"/>
             <Link href="/register" className={styles['form__link']}>Зарегистрироваться</Link>
         </form>
     )
