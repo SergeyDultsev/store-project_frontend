@@ -1,9 +1,9 @@
 import { ApiStore } from "@/shared/api/apiStore";
-import ILoginRespones from "@/types/authTypes/loginResponse";
+import IRegisterResponse from "@/types/authTypes/registerRespones";
 
-const API_URL : string = `${process.env.API_URL}/auth/login`;
+const API_URL : string = `${process.env.API_URL}/auth/register`;
 
-export function authorization({ email, password }: { email: string; password: string }): Promise<ILoginRespones> {
+export function registration({ name, email, password }: { name: string, email: string; password: string }): Promise<IRegisterResponse> {
     const response = ApiStore.useApi(API_URL, {
         method: 'POST',
         headers: {
@@ -11,6 +11,7 @@ export function authorization({ email, password }: { email: string; password: st
             'Accept': 'application/json',
         },
         body: JSON.stringify({
+            "name": name,
             "email": email,
             "password": password
         })
