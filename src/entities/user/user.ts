@@ -3,39 +3,56 @@ import {authorization} from "@/features/authServices/authorization";
 import {registration} from "@/features/authServices/registration";
 
 class user {
+    // Общие стейты
     id: string = "";
     name: string = "";
     email: string = "";
     isAuth: boolean = false;
     error: string = "";
 
-    // Данные формы авторизации или регистрации
-    tempName: string = "";
-    tempEmail:  string = "";
-    tempPassword:  string = "";
+    // Стейты формы авторизации
+    authEmail:  string = "";
+    authPassword:  string = "";
+
+    // Стейты формы регистрации
+    registerName: string = "";
+    registerEmail:  string = "";
+    registerPassword:  string = "";
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    setUserData(data: {id: string, name: string, email: string}) {
+    // Получение данных авторизованного пользователя
+    setAuthUserData(data: {id: string, name: string, email: string}) {
         this.id = data.id;
         this.name = data.name;
         this.email = data.email;
     }
 
-    setTempName(name: string) {
-        this.tempName = name;
+    // Сеттеры для формы регистрации
+    setRegisterName(name: string) {
+        this.registerName = name;
     }
 
-    setTempEmail(email: string){
-        this.tempEmail = email;
+    setRegisterEmail(email: string) {
+        this.registerEmail = email;
     }
 
-    setTempPassword(password: string){
-        this.tempPassword = password
+    setRegisterPassword(name: string) {
+        this.registerPassword = name;
     }
 
+    // Сеттеры для формы авторизации
+    setAuthEmail(email: string){
+        this.authEmail = email;
+    }
+
+    setAuthPassword(password: string){
+        this.authPassword = password
+    }
+
+    // Общие функций
     setErrorMessage(message: string) {
         this.error = message;
     }
@@ -44,10 +61,15 @@ class user {
         this.error = "";
     }
 
-    clearTempData() {
-        this.tempName = "";
-        this.tempEmail = "";
-        this.tempPassword = "";
+    clearAuthFormData() {
+        this.authEmail = "";
+        this.authPassword = "";
+    }
+
+    clearRegisterFormData() {
+        this.registerName = "";
+        this.registerEmail = "";
+        this.registerPassword = "";
     }
 
     async isAuthorization(tempEmail: string, tempPassword: string): Promise<void> {
@@ -55,23 +77,30 @@ class user {
 
         if (response && response.data) {
             this.isAuth = true;
-            this.setUserData({
+            this.setAuthUserData({
                 id: response.data.id,
                 name: response.data.name,
                 email: response.data.email
             });
             this.clearErrorMessage();
-            this.clearTempData();
+            this.clearAuthFormData();
         } else {
             this.isAuth = false;
-            this.clearTempData();
+            this.clearAuthFormData();
             this.setErrorMessage("Ошибка авторизации. Проверьте данные");
         }
     }
 
     async isRegistration(tempName:string, tempEmail: string, tempPassword: string): Promise<void> {
         const response = await registration({ tempName, tempEmail, tempPassword });
-        response && response.data ? this.clearErrorMessage() : this.setErrorMessage("Ошибка регистрации. Проверьте данные");
+
+        if(response && response.data){
+            this.clearRegisterFormData();
+            this.clearErrorMessage();
+        } else {
+            this.clearRegisterFormData();
+            this.setErrorMessage("Ошибка регистрации. Проверьте данные");
+        }
     }
 
 }

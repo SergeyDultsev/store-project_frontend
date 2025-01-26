@@ -4,27 +4,27 @@ import ButtonApp from '@/shared/ui/button/btnApp'
 import Link from "next/link";
 import user from "@/entities/user/user";
 import React from "react";
+import {observer} from "mobx-react-lite";
 
-export default function RegisterFrom() {
-
+const RegisterFrom: React.FC = observer(() => {
     const handleUserData = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
         switch (name){
             case "name":
-                user.setTempName(value);
+                user.setRegisterName(value);
                 break;
             case "email":
-                user.setTempEmail(value);
+                user.setRegisterEmail(value);
                 break;
             case "password":
-                user.setTempPassword(value);
+                user.setRegisterPassword(value);
                 break;
         }
     }
 
     const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        await user.isRegistration(user.tempName, user.tempEmail, user.tempPassword);
+        await user.isRegistration(user.registerName, user.registerEmail, user.registerPassword);
     }
 
     return (
@@ -36,21 +36,21 @@ export default function RegisterFrom() {
                 name="name"
                 type="text"
                 placeholder="Ваше имя пользователя"
-                value={user?.tempName || ''}
+                value={user?.registerName || ''}
             />
             <InputApp
                 onChange={handleUserData}
                 name="email"
                 type="email"
                 placeholder="Ваш Email"
-                value={user?.tempEmail || ''}
+                value={user?.registerEmail || ''}
             />
             <InputApp
                 onChange={handleUserData}
                 name="password"
                 type="password"
                 placeholder="Ваш пароль"
-                value={user?.tempPassword || ''}
+                value={user?.registerPassword || ''}
             />
             <ButtonApp
                 text="Зарегистрироваться"
@@ -59,4 +59,6 @@ export default function RegisterFrom() {
             <Link href="/auth" className={styles['form__link']}>Уже зарегистрированы?</Link>
         </form>
     );
-}
+});
+
+export default RegisterFrom;

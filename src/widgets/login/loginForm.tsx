@@ -6,22 +6,22 @@ import Link from "next/link";
 import user from "@/entities/user/user";
 import { observer } from 'mobx-react-lite';
 
-const loginForm: React.FC =  observer(() => {
+const loginForm: React.FC = observer(() => {
     const handleUserData = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target;
         switch (name){
             case "email":
-                user.setTempEmail(value);
+                user.setAuthEmail(value);
                 break;
             case "password":
-                user.setTempPassword(value);
+                user.setAuthPassword(value);
                 break;
         }
     }
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        await user.isAuthorization(user.tempEmail, user.tempPassword);
+        await user.isAuthorization(user.authEmail, user.authPassword);
     }
 
     return (
@@ -33,14 +33,14 @@ const loginForm: React.FC =  observer(() => {
                 name="email"
                 type="email"
                 placeholder="Ваш Email"
-                value={user?.tempEmail || ''}
+                value={user?.authEmail || ''}
             />
             <InputApp
                 onChange={handleUserData}
                 name="password"
                 type="password"
                 placeholder="Ваш пароль"
-                value={user?.tempPassword || ''}
+                value={user?.authPassword || ''}
             />
             <ButtonApp
                 text="Авторизоваться"
