@@ -1,9 +1,8 @@
-import { ApiStore } from "@/shared/api/apiStore";
-import IRegisterResponse from "@/types/authTypes/registerRespones";
+import ApiStore from "@/shared/api/apiStore";
 
-const API_URL : string = `${process.env.API_URL}/auth/register`;
+const API_URL : string = `${process.env.NEXT_PUBLIC_API_URL}/auth/register`;
 
-export function registration({ name, email, password }: { name: string, email: string; password: string }): Promise<IRegisterResponse> {
+export function registration({ tempName, tempEmail, tempPassword }: { tempName: string, tempEmail: string; tempPassword: string }) {
     const response = ApiStore.useApi(API_URL, {
         method: 'POST',
         headers: {
@@ -11,10 +10,11 @@ export function registration({ name, email, password }: { name: string, email: s
             'Accept': 'application/json',
         },
         body: JSON.stringify({
-            "name": name,
-            "email": email,
-            "password": password
-        })
+            "name": tempName,
+            "email": tempEmail,
+            "password": tempPassword
+        }),
+        credentials: 'include',
     });
     
     return response;

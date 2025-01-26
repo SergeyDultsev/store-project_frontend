@@ -1,9 +1,11 @@
-import AuthForm from "@/widgets/authorization/authorization"
+'use client'
+
+import LoginForm from "@/widgets/login/loginForm";
 
 export default function Auth() {
     return (
         <main>
-            <AuthForm></AuthForm>
+            <LoginForm />
         </main>
     );
 }

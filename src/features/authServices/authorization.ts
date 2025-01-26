@@ -1,9 +1,8 @@
-import { ApiStore } from "@/shared/api/apiStore";
-import ILoginRespones from "@/types/authTypes/loginResponse";
+import ApiStore from "@/shared/api/apiStore";
 
-const API_URL : string = `${process.env.API_URL}/auth/login`;
+const API_URL : string = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
 
-export function authorization({ email, password }: { email: string; password: string }): Promise<ILoginRespones> {
+export function authorization({ tempEmail, tempPassword }: { tempEmail: string; tempPassword: string }) {
     const response = ApiStore.useApi(API_URL, {
         method: 'POST',
         headers: {
@@ -11,10 +10,11 @@ export function authorization({ email, password }: { email: string; password: st
             'Accept': 'application/json',
         },
         body: JSON.stringify({
-            "email": email,
-            "password": password
-        })
+            "email": tempEmail,
+            "password": tempPassword
+        }),
+        credentials: 'include',
     });
-    
+
     return response;
 }

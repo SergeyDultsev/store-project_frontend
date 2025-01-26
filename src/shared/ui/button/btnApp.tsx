@@ -1,12 +1,13 @@
+import React from "react";
 import styles from './btnApp.module.scss'
 
 type propsBtn = {
     type: "button" | "submit" | "reset";
     text: string;
-    onClick: () => void;
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-export default function BtnApp({ text, type, onClick }) {
+const BtnApp: React.FC<propsBtn> = ({ text, type, onClick }) => {
     return (
         <button
             type={type}
@@ -15,3 +16,5 @@ export default function BtnApp({ text, type, onClick }) {
         >{ text }</button>
     );
 }
+
+export default BtnApp;
