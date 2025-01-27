@@ -1,0 +1,16 @@
+.btn-default{
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  padding: 10px 6px;
+  color: var(--main-color);
+  font-family: 'Onest falback';
+  font-size: 16px;
+
+  &:hover {
+    background-color: var(--main-color);
+    color: #FFFFFF;
+    transition: background-color 0.6s ease;
+  }
+}
+

@@ -1,2 +1,14 @@
 @use "reset";
 @use "variables";
+
+.app-wrapper{
+  position: relative;
+  display: flex;
+}
+
+main{
+  padding: 20px 40px;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+}
