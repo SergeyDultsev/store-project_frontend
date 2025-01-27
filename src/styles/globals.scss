@@ -1,20 +1,13 @@
 @use "reset";
 @use "variables";
 
-body{
-  position: relative;
-}
-
 .app-wrapper{
+  position: relative;
   display: flex;
-  height: 100vh;
 }
 
 main{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  padding: 20px 40px;
   margin: 0 auto;
   max-width: 1200px;
   width: 100%;

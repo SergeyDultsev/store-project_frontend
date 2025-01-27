@@ -14,6 +14,8 @@ export function authorization({ tempEmail, tempPassword }: { tempEmail: string; 
             "password": tempPassword
         }),
         credentials: 'include',
+        mode: 'cors',
+        cache: 'no-store',
     });
 
     return response;
