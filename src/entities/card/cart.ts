@@ -3,9 +3,9 @@ import ICartProduct from "@/types/cart/iCartProduct";
 import IProduct from "@/types/product/iProduct";
 
 class cart{
-    cartData: ICartProduct[] = [{id: '1', title: 'PC', price: 19999, state: 'in_cart', quantity: 0},
-        {id: '2', title: 'PC', price: 1999, state: 'in_cart', quantity: 0},
-        {id: '3', title: 'PC', price: 25999, state: 'in_cart', quantity: 0},];
+    cartData: ICartProduct[] = [{id: '1', title: 'PC', price: 19999, state: 'in_cart', quantity: 1},
+        {id: '2', title: 'PC', price: 1999, state: 'in_cart', quantity: 2},
+        {id: '3', title: 'PC', price: 25999, state: 'in_cart', quantity: 3},];
 
     constructor() {
         makeAutoObservable(this);
@@ -29,6 +29,24 @@ class cart{
             const idProduct = this.cartData.indexOf(productItem);
             if(idProduct != -1) this.cartData.splice(idProduct, 1);
         }
+    }
+
+    getQuantityProduct(): number{
+        let allProductInCard: number = 0;
+        this.cartData.forEach((cartItem) => {
+            allProductInCard += cartItem.quantity;
+        })
+
+        return allProductInCard
+    }
+
+    getTotalPrice(): number{
+        let totalPrice: number = 0;
+        this.cartData.forEach((cartItem) => {
+            totalPrice += cartItem.price;
+        })
+
+        return totalPrice
     }
 }
 
