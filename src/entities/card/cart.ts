@@ -12,7 +12,7 @@ class cart{
     /*
         Добавление товара в корзину
     */
-    setProductInCart(productData: IProduct){
+    setProductInCart(productData: IProduct): void{
         const tempCartProduct: ICartProduct = {
             id: productData.id,
             title: productData.title,
@@ -57,6 +57,27 @@ class cart{
         })
 
         return totalPrice
+    }
+
+    /*
+        Увеличить кол-во товара в корзине
+    */
+    incrementQuantity(productID: string): void{
+        const productItem = this.cartData.find((item) => item.id === productID);
+        productItem.quantity += 1;
+    }
+
+    /*
+        Уменьшить кол-во товара в корзине
+    */
+    decrementQuantity(productID: string): void{
+        const productItem = this.cartData.find((item) => item.id === productID);
+
+        if(productItem.quantity > 0) {
+            productItem.quantity -= 1;
+        } else {
+            this.deleteProductInCart(productItem.id);
+        }
     }
 }
 
