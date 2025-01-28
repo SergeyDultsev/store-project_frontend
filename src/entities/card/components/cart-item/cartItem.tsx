@@ -5,10 +5,11 @@ import {observer} from "mobx-react-lite";
 import React from "react";
 import IProductItemProps from '@/types/product/iProductItemProps'
 import BtnApp from "@/shared/ui/button/btnApp";
+import cart from "@/entities/card/cart";
 
 const CardItem: React.FC<IProductItemProps> = observer(({product}) => {
     const handleDeleteProduct = () => {
-
+        cart.handleProductInCart(product.id)
     }
 
     return (

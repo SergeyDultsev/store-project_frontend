@@ -1,4 +1,8 @@
 .btn-default{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-small);
@@ -9,6 +13,7 @@
 
   &:hover {
     background-color: var(--main-color);
+    fill: #FFFFFF;
     color: #FFFFFF;
     transition: background-color 0.6s ease;
   }

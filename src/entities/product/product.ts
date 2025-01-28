@@ -14,6 +14,14 @@ class product{
         {id: '9', title: 'PC', price: 19999, state: 'available'},
         {id: '10', title: 'PC', price: 19999, state: 'available'},
     ];
+
+    constructor() {
+        makeAutoObservable(this);
+    }
+
+    changeStateProduct(productId: string){
+
+    }
 }
 
 export default new product;

@@ -4,7 +4,7 @@ import styles from '@/widgets/cart-total/cartTotal.module.scss'
 import CartList from "@/widgets/cart-list/cartList";
 import CartTotal from "@/widgets/cart-total/cartTotal";
 import BtnApp from "@/shared/ui/button/btnApp";
-import product from "@/entities/product/product";
+import cart from "@/entities/card/cart";
 
 export default function Page() {
     const handleCard = () => {
@@ -18,7 +18,7 @@ export default function Page() {
                     <CartTotal />
                     <BtnApp text={"Оформить заказ"} type={'button'} onClick={handleCard}/>
                 </div>
-                <CartList products={product.productData}/>
+                <CartList products={cart.cartData}/>
             </section>
         </main>
     );
