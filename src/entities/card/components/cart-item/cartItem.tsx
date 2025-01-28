@@ -9,7 +9,7 @@ import cart from "@/entities/card/cart";
 
 const CardItem: React.FC<IProductItemProps> = observer(({product}) => {
     const handleDeleteProduct = () => {
-        cart.handleProductInCart(product.id)
+        cart.deleteProductInCart(product.id)
     }
 
     return (

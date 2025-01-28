@@ -3,14 +3,15 @@ import ICartProduct from "@/types/cart/iCartProduct";
 import IProduct from "@/types/product/iProduct";
 
 class cart{
-    cartData: ICartProduct[] = [{id: '1', title: 'PC', price: 19999, state: 'in_cart', quantity: 1},
-        {id: '2', title: 'PC', price: 1999, state: 'in_cart', quantity: 2},
-        {id: '3', title: 'PC', price: 25999, state: 'in_cart', quantity: 3},];
+    cartData: ICartProduct[] = [];
 
     constructor() {
         makeAutoObservable(this);
     }
 
+    /*
+        Добавление товара в корзину
+    */
     setProductInCart(productData: IProduct){
         const tempCartProduct: ICartProduct = {
             id: productData.id,
@@ -23,7 +24,10 @@ class cart{
         this.cartData.push(tempCartProduct);
     }
 
-    handleProductInCart(productID: string){
+    /*
+        Удаление товара из корзины
+    */
+    deleteProductInCart(productID: string){
         const productItem = this.cartData.find((item) => item.id === productID);
         if(productItem) {
             const idProduct = this.cartData.indexOf(productItem);
@@ -31,6 +35,9 @@ class cart{
         }
     }
 
+    /*
+        Получение общего кол-ва товаров в корзине
+    */
     getQuantityProduct(): number{
         let allProductInCard: number = 0;
         this.cartData.forEach((cartItem) => {
@@ -40,6 +47,9 @@ class cart{
         return allProductInCard
     }
 
+    /*
+        Получение общей стоимости всех товаров в корзине
+    */
     getTotalPrice(): number{
         let totalPrice: number = 0;
         this.cartData.forEach((cartItem) => {
