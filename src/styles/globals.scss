@@ -2,13 +2,10 @@
 @use "variables";
 
 .app-wrapper{
-  position: relative;
-  display: flex;
+  height: 100vh;
 }
 
 main{
-  padding: 20px 40px;
-  margin: 0 auto;
-  max-width: 1200px;
+  padding: 20px 440px;
   width: 100%;
 }

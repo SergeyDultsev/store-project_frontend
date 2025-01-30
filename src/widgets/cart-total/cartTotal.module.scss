@@ -1,24 +1,33 @@
-.card-wrapper{
-  width: 100%;
+.card-wrapper {
   display: flex;
   gap: 20px;
 }
 
-.card-total__block{
+.card-total__block {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .card-total{
+  position: fixed;
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 100%;
+  max-width: 400px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-small);
   padding: 20px;
   margin-right: 20px;
+
+  &__top{
+    display: flex;
+    gap: 30px;
+  }
 
   &__info{
     display: flex;

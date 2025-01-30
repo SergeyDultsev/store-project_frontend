@@ -1,18 +1,35 @@
 .product-item{
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
   width: 100%;
-  max-width: 300px;
+  max-width: 800px;
   border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 20px;
 
   &__title{
+    font-size: 16px;
+    width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--main-color);
   }
 
   &__info{
     color: var(--main-color);
   }
+
+  &__left{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 }
