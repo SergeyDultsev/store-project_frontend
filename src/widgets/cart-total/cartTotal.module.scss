@@ -1,4 +1,5 @@
 .card-wrapper {
+  width: 100%;
   display: flex;
   gap: 20px;
 }
@@ -41,5 +42,20 @@
     &__price{
       color: var(--main-color);
     }
+  }
+}
+
+@media (max-width: 1300px) {
+  .card-wrapper {
+    flex-direction: column;
+  }
+
+  .card-total{
+    position: static;
+    width: 100%;
+    max-width: 500px;
+    min-width: 400px;
+    padding: 20px;
+    margin-right: 0;
   }
 }

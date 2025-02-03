@@ -15,6 +15,8 @@ export function registration({ tempName, tempEmail, tempPassword }: { tempName: 
             "password": tempPassword
         }),
         credentials: 'include',
+        mode: 'cors',
+        cache: 'no-store',
     });
     
     return response;

@@ -1,13 +1,14 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, runInAction, action} from "mobx";
 import {authorization} from "@/features/authServices/authorization";
 import {registration} from "@/features/authServices/registration";
+import {logout} from "@/features/authServices/logout";
 
 class user {
     // Общие стейты
     id: string = "";
     name: string = "";
     email: string = "";
-    isAuth: boolean = false;
+    isAuth: boolean = true;
     error: string = "";
 
     // Стейты формы авторизации
@@ -20,7 +21,21 @@ class user {
     registerPassword:  string = "";
 
     constructor() {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {
+            setAuthUserData: action,
+            setRegisterName: action,
+            setRegisterEmail: action,
+            setRegisterPassword: action,
+            setAuthEmail: action,
+            setAuthPassword: action,
+            setErrorMessage: action,
+            clearErrorMessage: action,
+            clearAuthFormData: action,
+            clearRegisterFormData: action,
+            isAuthorization: action,
+            isRegistration: action,
+            isLogout: action,
+        });
     }
 
     // Получение данных авторизованного пользователя
@@ -75,32 +90,50 @@ class user {
     async isAuthorization(tempEmail: string, tempPassword: string): Promise<void> {
         const response = await authorization({ tempEmail, tempPassword });
 
-        if (response && response.data) {
-            this.isAuth = true;
-            this.setAuthUserData({
-                id: response.data.id,
-                name: response.data.name,
-                email: response.data.email
-            });
-            this.clearErrorMessage();
-            this.clearAuthFormData();
-        } else {
-            this.isAuth = false;
-            this.clearAuthFormData();
-            this.setErrorMessage("Ошибка авторизации. Проверьте данные");
-        }
+        runInAction(() => {
+            if (response && response.status === 200) {
+                this.isAuth = true;
+                this.setAuthUserData({
+                    id: response.data.id,
+                    name: response.data.name,
+                    email: response.data.email
+                });
+                this.clearErrorMessage();
+                this.clearAuthFormData();
+            } else {
+                this.isAuth = false;
+                this.clearAuthFormData();
+                this.setErrorMessage("Error");
+            }
+        });
     }
 
     async isRegistration(tempName:string, tempEmail: string, tempPassword: string): Promise<void> {
         const response = await registration({ tempName, tempEmail, tempPassword });
 
-        if(response && response.data){
-            this.clearRegisterFormData();
-            this.clearErrorMessage();
-        } else {
-            this.clearRegisterFormData();
-            this.setErrorMessage("Ошибка регистрации. Проверьте данные");
-        }
+        runInAction(() => {
+            if(response && response.status === 201){
+                this.clearRegisterFormData();
+                this.clearErrorMessage();
+            } else {
+                this.clearRegisterFormData();
+                this.setErrorMessage("Error");
+            }
+        });
+    }
+
+    async isLogout(): Promise<void> {
+        const response = await logout();
+
+        runInAction(() => {
+            if(response && response.status === 200){
+                response.data.state === true ? this.isAuth = true : this.isAuth = false;
+                this.clearErrorMessage();
+            } else {
+                this.isAuth = false;
+                this.setErrorMessage("Error");
+            }
+        });
     }
 
 }

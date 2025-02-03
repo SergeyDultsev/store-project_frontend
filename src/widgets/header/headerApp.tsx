@@ -5,11 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import user from '@/entities/user/user';
 import {observer} from "mobx-react-lite";
+import {useRouter} from "next/navigation";
 
 const HeaderApp: React.FC = observer(() => {
+    const router = useRouter();
+
+    const handleLogout = (event: MouseEvent) => {
+        event.preventDefault();
+        user.isLogout();
+        router.push("/");
+    }
+
     return (
         <header className={styles['header']}>
-            {!user.isAuth ? (
+            {user.isAuth ? (
                 <nav className={styles['header__nav']}>
                     <Link href="/" className={styles['header__nav-item']}>
                         <Image src="./img/icon/catalog.svg" alt="catalog" width={20} height={20}/>
@@ -23,7 +32,7 @@ const HeaderApp: React.FC = observer(() => {
                         <Image src="./img/icon/cart.svg" alt="cart" width={20} height={20}/>
                         Корзина
                     </Link>
-                    <Link href="/auth" className={styles['header__nav-item']}>
+                    <Link href="/" onClick={handleLogout} className={styles['header__nav-item']}>
                         <Image src="./img/icon/exit.svg" alt="catalog" width={20} height={20}/>
                         Выход
                     </Link>

@@ -16,6 +16,7 @@ class ApiStore<T = any> {
 
         try{
             const response = await fetch(url, option);
+
             if (!response.ok) {
                 this.error = `HTTP error! Status: ${response.status}`;
                 return null as unknown as IResponse<T>;
