@@ -2,7 +2,6 @@ import {makeAutoObservable} from "mobx";
 import ICartProduct from "@/types/cart/iCartProduct";
 import IProduct from "@/types/product/iProduct";
 import product from "@/entities/product/product";
-import cartItem from "@/entities/card/components/cart-item/cartItem";
 
 class cart{
     cartData: ICartProduct[] = [];

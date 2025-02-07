@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {action, makeAutoObservable, runInAction} from "mobx";
 import IResponse from "@/types/shared/iResponse";
 
 class ApiStore<T = any> {
@@ -7,10 +7,12 @@ class ApiStore<T = any> {
     error: string = "";
 
     constructor() {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {
+            useApi: action,
+        });
     }
 
-    async useApi(url: string, option: object): Promise<IResponse<T>> {
+    async useApi(url: string, option: object): Promise<IResponse<T> | null> {
         this.loader = true;
         this.error = "";
 
@@ -21,14 +23,26 @@ class ApiStore<T = any> {
                 this.error = `HTTP error! Status: ${response.status}`;
                 return null as unknown as IResponse<T>;
             }
+
             const data: IResponse<T>  = await response.json();
-            this.data = data;
+
+            runInAction(() => {
+                this.data = data;
+            });
+
             return data;
         } catch (error) {
-            if(error instanceof Error) this.error = error.message;
-            return null as unknown as IResponse<T>;
+            runInAction(() => {
+                if (error instanceof Error) {
+                    this.error = error.message;
+                }
+            });
+
+            return null;
         } finally {
-            this.loader = false;
+            runInAction(() => {
+                this.loader = false;
+            });
         }
     }
 }

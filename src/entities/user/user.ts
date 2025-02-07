@@ -8,7 +8,7 @@ class user {
     id: string = "";
     name: string = "";
     email: string = "";
-    isAuth: boolean = true;
+    isAuth: boolean = false;
     error: string = "";
 
     // Стейты формы авторизации

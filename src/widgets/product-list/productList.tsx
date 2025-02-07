@@ -2,15 +2,21 @@
 
 import styles from './productList.module.scss';
 import {observer} from "mobx-react-lite";
-import React from "react";
-import IProductListProps from "@/types/product/IProductListProps";
+import React, {useEffect} from "react";
 import ProductItem from "@/entities/product/components/product-item/productItem";
+import product from "@/entities/product/product";
 
-const ProductList: React.FC<IProductListProps> = observer(({ products }) => {
+const ProductList = observer(() => {
+
+    useEffect(() => {
+        product.getProducts();
+    }, [])
+
+
     return (
         <section className={styles["product-list"]}>
-            {products.map((product) => (
-                <ProductItem key={product.id} product={product} />
+            {product.productData.map((product) => (
+                <ProductItem key={product.product_id} product={product} />
             ))}
         </section>
     );

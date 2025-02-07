@@ -13,28 +13,26 @@ const ProductItem: React.FC<IProductItemProps> = observer(({product}) => {
     }
 
     const handleDeleteProduct = () => {
-        cart.deleteProductInCart(product.id);
+        cart.deleteProductInCart(product.product_id);
     }
 
     return (
         <article className={styles['product-item']}>
             <div className={styles['product-item__left']}>
-                <h2 className={styles['product-item__title']}>{product.title}</h2>
-                <p className={styles['product-item__info']}>Цена: {product.price} руб.</p>
+                <h2 className={styles['product-item__title']}>{product.product_name}</h2>
+                <p className={styles['product-item__info']}>Цена: {product.product_price} руб.</p>
             </div>
 
             <div className={styles['product-item__right']}>
                 {
-                    product.state === "available" ? (
+                    product.product_state === "available" ? (
                         <BtnApp
                             text={'В корзину'}
-                            img={'./img/icon/cart.svg'}
                             type={'button'}
                             onClick={handleSetProduct}/>
                     ) : (
                         <BtnApp
                             text={'Удалить с корзины'}
-                            img={'./img/icon/cart.svg'}
                             type={'button'}
                             onClick={handleDeleteProduct}/>
                     )
