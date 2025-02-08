@@ -12,7 +12,6 @@ const ProductList = observer(() => {
         product.getProducts();
     }, [])
 
-
     return (
         <section className={styles["product-list"]}>
             {product.productData.map((product) => (

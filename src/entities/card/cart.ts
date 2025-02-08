@@ -17,15 +17,15 @@ class cart{
     */
     setProductInCart(productData: IProduct): void{
         const tempCartProduct: ICartProduct = {
-            id: productData.id,
-            title: productData.title,
-            price: productData.price,
+            id: productData.product_id,
+            title: productData.product_name,
+            price: productData.product_price,
             state: "in_cart",
             quantity: 1
         }
 
         this.cartData.push(tempCartProduct);
-        product.changeStateProduct(productData.id);
+        product.changeStateProduct(productData.product_id);
         this.getQuantityProduct();
         this.getTotalPrice();
     }
@@ -57,9 +57,9 @@ class cart{
         Получение общей стоимости всех товаров в корзине
     */
     getTotalPrice(): void{
-        this.totalPrice = this.cartData.reduce((total, cartItem) =>
+        this.totalPrice = Math.round(this.cartData.reduce((total, cartItem) =>
             total + cartItem.price * cartItem.quantity, 0
-        );
+        ) * 100) / 100;
     }
 
     /*

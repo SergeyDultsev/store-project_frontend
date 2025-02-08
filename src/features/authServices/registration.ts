@@ -2,8 +2,8 @@ import ApiStore from "@/shared/api/apiStore";
 
 const API_URL : string = `${process.env.NEXT_PUBLIC_API_URL}/auth/register`;
 
-export function registration({ tempName, tempEmail, tempPassword }: { tempName: string, tempEmail: string; tempPassword: string }) {
-    const response = ApiStore.useApi(API_URL, {
+export async function registration({ tempName, tempEmail, tempPassword }: { tempName: string, tempEmail: string; tempPassword: string }) {
+    return await ApiStore.useApi(API_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -18,6 +18,4 @@ export function registration({ tempName, tempEmail, tempPassword }: { tempName: 
         mode: 'cors',
         cache: 'no-store',
     });
-    
-    return response;
 }

@@ -1,7 +1,8 @@
-import {makeAutoObservable, runInAction, action} from "mobx";
+import {makeAutoObservable, runInAction, action, toJS} from "mobx";
 import {authorization} from "@/features/authServices/authorization";
 import {registration} from "@/features/authServices/registration";
 import {logout} from "@/features/authServices/logout";
+import {authCheck} from "@/features/authServices/authCheck";
 
 class user {
     // Общие стейты
@@ -127,7 +128,7 @@ class user {
 
         runInAction(() => {
             if(response && response.status === 200){
-                response.data.state === true ? this.isAuth = true : this.isAuth = false;
+                this.isAuth = false;
                 this.clearErrorMessage();
             } else {
                 this.isAuth = false;
@@ -136,6 +137,19 @@ class user {
         });
     }
 
+    async authorizationCheck(): Promise<void> {
+        const response = await authCheck();
+
+        runInAction(() => {
+            if(response && response.status === 200){
+                this.isAuth = response.data?.authorized === true;
+                this.clearErrorMessage();
+            } else {
+                this.isAuth = false;
+                this.setErrorMessage("Error");
+            }
+        });
+    }
 }
 
 export default new user;
