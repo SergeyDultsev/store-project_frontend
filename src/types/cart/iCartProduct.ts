@@ -1,8 +1,9 @@
 interface ICartProduct {
-    id: string;
-    title: string;
-    price: number;
-    state: 'in_cart' | 'available';
+    cart_id: string;
+    product_id: string;
+    product_name: string;
+    product_price: number;
+    state: 'in_cart';
     quantity: number;
 }
 

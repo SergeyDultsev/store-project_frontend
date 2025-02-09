@@ -1,12 +1,12 @@
 import ApiStore from "@/shared/api/apiStore";
 import Cookies from "js-cookie";
 
-const API_URL : string = `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`;
+const API_URL : string = `${process.env.NEXT_PUBLIC_API_URL}/cart`;
 
-export async function logout() {
+export async function getCart() {
     const token: string | undefined = Cookies.get('auth_token');
     return await ApiStore.useApi(API_URL, {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
@@ -15,5 +15,5 @@ export async function logout() {
         credentials: 'include',
         mode: 'cors',
         cache: 'no-store',
-    });;
+    })
 }

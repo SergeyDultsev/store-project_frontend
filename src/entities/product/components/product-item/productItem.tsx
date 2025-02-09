@@ -5,7 +5,7 @@ import {observer} from "mobx-react-lite";
 import React from "react";
 import IProductItemProps from '@/types/product/iProductItemProps'
 import BtnApp from "@/shared/ui/button/btnApp";
-import cart from "@/entities/card/cart";
+import cart from "@/entities/cart/cart";
 
 const ProductItem: React.FC<IProductItemProps> = observer(({product}) => {
     const handleSetProduct = () => {

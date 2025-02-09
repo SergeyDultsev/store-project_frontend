@@ -3,14 +3,14 @@
 import styles from './cartList.module.scss';
 import {observer} from "mobx-react-lite";
 import React from "react";
-import IProductListProps from "@/types/product/IProductListProps";
-import CartItem from "@/entities/card/components/cart-item/cartItem";
+import CartItem from "@/entities/cart/components/cart-item/cartItem";
+import cart from "@/entities/cart/cart";
 
-const CartList: React.FC<IProductListProps> = observer(({ products }) => {
+const CartList = observer(() => {
     return (
         <section className={styles["cart-list"]}>
-            {products.map((product) => (
-                <CartItem key={product.id} product={product} />
+            {cart.cartData.map((product) => (
+                <CartItem key={product.cart_id} product={product} />
             ))}
         </section>
     );

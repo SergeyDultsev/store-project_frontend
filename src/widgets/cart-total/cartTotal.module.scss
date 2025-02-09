@@ -1,10 +1,10 @@
-.card-wrapper {
+.cart-wrapper {
   width: 100%;
   display: flex;
   gap: 20px;
 }
 
-.card-total__block {
+.cart-total__block {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
   max-width: 400px;
 }
 
-.card-total{
+.cart-total{
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -46,11 +46,11 @@
 }
 
 @media (max-width: 1300px) {
-  .card-wrapper {
+  .cart-wrapper {
     flex-direction: column;
   }
 
-  .card-total{
+  .cart-total{
     position: static;
     width: 100%;
     max-width: 500px;
