@@ -15,5 +15,5 @@ export async function logout() {
         credentials: 'include',
         mode: 'cors',
         cache: 'no-store',
-    });;
+    });
 }
