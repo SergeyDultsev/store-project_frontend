@@ -4,6 +4,7 @@ import product from "@/entities/product/product";
 import {getCart} from "@/features/cartServices/getCart";
 import {deleteCartItem} from "@/features/cartServices/deleteCartItem";
 import {setCartItem} from "@/features/cartServices/setCartItem";
+import {setQuantity} from "@/features/cartServices/setQuantity";
 
 class cart{
     cartData: ICartProduct[] = [];
@@ -103,22 +104,32 @@ class cart{
     /*
         Увеличить кол-во товара в корзине
     */
-    incrementQuantity(cartId: string): void{
+    async incrementQuantity(cartId: string){
         const cartItem = this.cartData.find((item: ICartProduct) => item.cart_id === cartId);
-        cartItem.quantity += 1;
-        this.calculateCart();
+
+        if(cartItem){
+            const response = await setQuantity(cartId, 1);
+            if(response && response.status === 200){
+                cartItem.quantity += 1;
+                this.calculateCart();
+            }
+        }
     }
 
     /*
         Уменьшить кол-во товара в корзине
     */
-    decrementQuantity(cartId: string){
-        const cartItem = this.cartData.find((item: ICartProduct) => item.cart_id === cartId);
+    async decrementQuantity(cartId: string){
+        const cartItem: ICartProduct = this.cartData.find((item: ICartProduct) => item.cart_id === cartId);
 
         if(cartItem.quantity > 1) {
-            cartItem.quantity -= 1;
+            const response = await setQuantity(cartId, -1);
+            if (response && response.status === 200){
+                cartItem.quantity -= 1;
+                this.calculateCart();
+            }
         } else {
-            this.deleteProductInCart(cartItem.cart_id);
+            this.deleteProductInCart(cartId);
         }
 
         this.calculateCart();

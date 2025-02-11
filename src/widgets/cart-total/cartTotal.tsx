@@ -9,8 +9,6 @@ import BtnApp from "@/shared/ui/button/btnApp";
 
 
 const CartTotal: React.FC = observer(() => {
-    console.log("Total products:", cart.countProducts); // Проверим изменения
-    console.log("Total price:", cart.totalPrice); // Проверим изменения
 
     const handleCard = () => {
 
@@ -27,7 +25,6 @@ const CartTotal: React.FC = observer(() => {
                     <p className={styles["cart-total__info__title"]}>общая цена</p>
                     <h2 className={styles["cart-total__info__price"]}>{cart.totalPrice} руб</h2>
                 </div>
-
             </div>
 
             <BtnApp text={"Оформить заказ"} type={'button'} onClick={handleCard}/>
