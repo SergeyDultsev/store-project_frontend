@@ -6,6 +6,7 @@ import React from "react";
 import IProductItemProps from '@/types/product/iProductItemProps'
 import BtnApp from "@/shared/ui/button/btnApp";
 import cart from "@/entities/cart/cart";
+import ICartProduct from "@/types/cart/iCartProduct";
 
 const ProductItem: React.FC<IProductItemProps> = observer(({product}) => {
     const handleSetProduct = () => {
@@ -13,7 +14,11 @@ const ProductItem: React.FC<IProductItemProps> = observer(({product}) => {
     }
 
     const handleDeleteProduct = () => {
-        cart.deleteProductInCart(product.product_id);
+        const cartItem: ICartProduct | undefined = cart.cartData.find(
+            (item: ICartProduct) => product.product_id === item.product_id
+        );
+
+        cart.deleteProductInCart(cartItem.cart_id);
     }
 
     return (
