@@ -6,12 +6,13 @@ import {observer} from "mobx-react-lite";
 import React from "react";
 import cart from "@/entities/cart/cart";
 import BtnApp from "@/shared/ui/button/btnApp";
+import order from "@/entities/order/order";
 
 
 const CartTotal: React.FC = observer(() => {
 
     const handleCard = () => {
-
+        order.setOrders();
     }
 
     return (

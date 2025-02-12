@@ -142,6 +142,20 @@ class cart{
         this.countProducts = this.getQuantityProduct();
         this.totalPrice = this.getTotalPrice();
     }
+
+    /*
+        Обнуление корзины
+     */
+    cleanCart() {
+        this.totalPrice = 0;
+        this.countProducts= 0;
+
+        this.cartData.forEach((item: ICartProduct) => {
+            this.deleteProductInCart(item.cart_id);
+        })
+
+        this.cartData = [];
+    }
 }
 
 export default new cart;

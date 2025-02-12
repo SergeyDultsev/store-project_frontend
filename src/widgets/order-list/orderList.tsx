@@ -14,7 +14,7 @@ const ProductList = observer(() => {
     return (
         <section className={styles["order-list"]}>
             {order.orderData.map((product ) => (
-                <OrderItem key={product.product_id} product={product} />
+                <OrderItem key={product.order_id} product={product} />
             ))}
         </section>
     );
