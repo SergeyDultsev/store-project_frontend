@@ -1,8 +1,9 @@
-import {makeAutoObservable, runInAction, action, toJS} from "mobx";
+import {makeAutoObservable, runInAction, action} from "mobx";
 import {authorization} from "@/features/authServices/authorization";
 import {registration} from "@/features/authServices/registration";
 import {logout} from "@/features/authServices/logout";
 import {authCheck} from "@/features/authServices/authCheck";
+import { useRouter } from 'next/router';
 
 class user {
     // Общие стейты
@@ -89,6 +90,7 @@ class user {
     }
 
     async isAuthorization(tempEmail: string, tempPassword: string): Promise<void> {
+        const router = useRouter();
         const response = await authorization({ tempEmail, tempPassword });
 
         runInAction(() => {
@@ -101,6 +103,7 @@ class user {
                 });
                 this.clearErrorMessage();
                 this.clearAuthFormData();
+                router.replace('/');
             } else {
                 this.isAuth = false;
                 this.clearAuthFormData();
