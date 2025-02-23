@@ -48,13 +48,15 @@
 
 @media (max-width: 1300px) {
   .cart-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
   }
 
   .cart-total{
     position: static;
     width: 100%;
-    min-width: 500px;
     padding: 20px;
     margin-right: 0;
   }

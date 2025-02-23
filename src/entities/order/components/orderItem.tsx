@@ -10,8 +10,7 @@ const OrderItem: React.FC<IOrderItemProps> = observer(({product}) => {
         <article className={styles['order-item']}>
             <div className={styles['order-item__left']}>
                 <h2 className={styles['order-item__title']}>{product.product_name}</h2>
-                <p className={styles['order-item__info']}>Цена: {product.product_price} руб.</p>
-                <p className={styles['order-item__info']}>Приобретено в кол-ве: {product.quantity} руб.</p>
+                <p className={styles['order-item__info']}>Приобретено в кол-ве: {product.quantity} шт.</p>
             </div>
         </article>
     )
