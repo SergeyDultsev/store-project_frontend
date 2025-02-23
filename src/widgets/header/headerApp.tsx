@@ -21,30 +21,24 @@ const HeaderApp: React.FC = observer(() => {
             {user.isAuth ? (
                 <nav className={styles['header__nav']}>
                     <Link href="/" className={styles['header__nav-item']}>
-                        <Image src="./img/icon/catalog.svg" alt="catalog" width={20} height={20}/>
                         Каталог
                     </Link>
                     <Link href="/profile" className={styles['header__nav-item']}>
-                        <Image src="./img/icon/profile.svg" alt="profile" width={20} height={20}/>
                         Личный кабинет
                     </Link>
                     <Link href="/cart" className={styles['header__nav-item']}>
-                        <Image src="./img/icon/cart.svg" alt="cart" width={20} height={20}/>
                         Корзина
                     </Link>
                     <Link href="/" onClick={handleLogout} className={styles['header__nav-item']}>
-                        <Image src="./img/icon/exit.svg" alt="catalog" width={20} height={20}/>
                         Выход
                     </Link>
                 </nav>
             ) : (
                 <nav className={styles['header__nav']}>
                     <Link href="/" className={styles['header__nav-item']}>
-                        <Image src="./img/icon/catalog.svg" alt="catalog" width={20} height={20}/>
                         Каталог
                     </Link>
                     <Link href="/auth" className={styles['header__nav-item']}>
-                        <Image src="./img/icon/exit.svg" alt="catalog" width={20} height={20}/>
                         Авторизация
                     </Link>
                 </nav>
