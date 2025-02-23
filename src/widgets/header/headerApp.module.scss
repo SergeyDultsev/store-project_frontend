@@ -1,19 +1,17 @@
 .header{
   position: fixed;
   width: 100%;
-  max-width: 400px;
   display: flex;
-  justify-content: flex-end;
-  padding: 20px;
-  border-right: 1px solid var(--border-color);
-  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  background-color: #FFFFFF;
+  height: 60px;
 }
 
 .header__nav {
-  width: 100%;
-  max-width: 240px;
   display: flex;
-  flex-direction: column;
+  gap: 20px;
 }
 
 .header__nav-item {
@@ -21,8 +19,7 @@
   align-items: center;
   font-size: 14px;
   gap: 10px;
-  width: 100%;
-  padding: 20px 14px;
+  padding: 10px;
   color: var(--main-color);
   border-radius: var(--border-radius-small);
   transition: background-color 0.6s ease;
