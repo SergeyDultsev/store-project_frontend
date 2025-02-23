@@ -5,11 +5,13 @@ import {observer} from "mobx-react-lite";
 import React, {useEffect} from "react";
 import ProductItem from "@/entities/product/components/product-item/productItem";
 import product from "@/entities/product/product";
+import cart from '@/entities/cart/cart';
 
 const ProductList = observer(() => {
 
     useEffect(() => {
         product.getProducts();
+        cart.getCartProducts();
     }, [])
 
     return (
