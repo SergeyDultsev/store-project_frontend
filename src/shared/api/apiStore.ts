@@ -1,5 +1,5 @@
 import {action, makeAutoObservable, runInAction} from "mobx";
-import IResponse from "@/types/shared/iResponse";
+import IResponse from "@/shared/types/iResponse";
 
 class ApiStore<T = any> {
     data: IResponse<T> | null = null;

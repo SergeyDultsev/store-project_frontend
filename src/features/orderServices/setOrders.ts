@@ -1,6 +1,6 @@
 import ApiStore from "@/shared/api/apiStore";
 import Cookies from "js-cookie";
-import iCartProduct from "@/types/cart/iCartProduct";
+import iCartProduct from "@/entities/cart/model/types/cart/iCartProduct";
 
 export async function setOrders(order: iCartProduct[]){
     const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/order/`;

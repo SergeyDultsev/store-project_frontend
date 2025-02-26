@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Onest } from "next/font/google";
 import "@/styles/globals.scss";
-import HeaderApp from "@/widgets/header/headerApp"
+import HeaderApp from "@/widgets/header-app/HeaderApp"
 
 const onestSans = Onest({
   variable: "--font-Onest-sans",

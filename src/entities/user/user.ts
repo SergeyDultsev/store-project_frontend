@@ -3,6 +3,7 @@ import {authorization} from "@/features/authServices/authorization";
 import {registration} from "@/features/authServices/registration";
 import {logout} from "@/features/authServices/logout";
 import {authCheck} from "@/features/authServices/authCheck";
+import IResponse from "@/shared/types/iResponse";
 
 class user {
     // Общие стейты
@@ -40,58 +41,58 @@ class user {
     }
 
     // Получение данных авторизованного пользователя
-    setAuthUserData(data: {id: string, name: string, email: string}) {
+    setAuthUserData(data: {id: string, name: string, email: string}): void {
         this.id = data.id;
         this.name = data.name;
         this.email = data.email;
     }
 
     // Сеттеры для формы регистрации
-    setRegisterName(name: string) {
+    setRegisterName(name: string): void {
         this.registerName = name;
     }
 
-    setRegisterEmail(email: string) {
+    setRegisterEmail(email: string): void {
         this.registerEmail = email;
     }
 
-    setRegisterPassword(name: string) {
+    setRegisterPassword(name: string): void {
         this.registerPassword = name;
     }
 
     // Сеттеры для формы авторизации
-    setAuthEmail(email: string){
+    setAuthEmail(email: string): void{
         this.authEmail = email;
     }
 
-    setAuthPassword(password: string){
+    setAuthPassword(password: string): void{
         this.authPassword = password
     }
 
     // Общие функций
-    setErrorMessage(message: string) {
+    setErrorMessage(message: string): void {
         this.error = message;
     }
 
-    clearErrorMessage() {
+    clearErrorMessage(): void {
         this.error = "";
     }
 
-    clearAuthFormData() {
+    clearAuthFormData(): void {
         this.authEmail = "";
         this.authPassword = "";
     }
 
-    clearRegisterFormData() {
+    clearRegisterFormData(): void {
         this.registerName = "";
         this.registerEmail = "";
         this.registerPassword = "";
     }
 
     async isAuthorization(tempEmail: string, tempPassword: string): Promise<void> {
-        const response = await authorization({ tempEmail, tempPassword });
+        const response: IResponse<any> | null = await authorization({ tempEmail, tempPassword });
 
-        runInAction(() => {
+        runInAction((): void => {
             if (response && response.status === 200) {
                 this.isAuth = true;
                 this.setAuthUserData({
@@ -110,7 +111,7 @@ class user {
     }
 
     async isRegistration(tempName:string, tempEmail: string, tempPassword: string): Promise<void> {
-        const response = await registration({ tempName, tempEmail, tempPassword });
+        const response: IResponse<any> | null = await registration({ tempName, tempEmail, tempPassword });
 
         runInAction(() => {
             if(response && response.status === 201){
@@ -124,7 +125,7 @@ class user {
     }
 
     async isLogout(): Promise<void> {
-        const response = await logout();
+        const response: IResponse<any> | null = await logout();
 
         runInAction(() => {
             if(response && response.status === 200){
@@ -138,7 +139,7 @@ class user {
     }
 
     async authorizationCheck(): Promise<void> {
-        const response = await authCheck();
+        const response: IResponse<any> | null = await authCheck();
 
         runInAction(() => {
             if(response && response.status === 200){
