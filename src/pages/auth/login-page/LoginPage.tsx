@@ -1,5 +1,5 @@
 import {useLayoutEffect} from "react";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 import LoginForm from "@/widgets/login-form/LoginForm";
 import user from "@/entities/user/user";
 

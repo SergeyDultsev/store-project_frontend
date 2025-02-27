@@ -1,8 +1,8 @@
 import {makeAutoObservable, runInAction, action} from "mobx";
-import {authorization} from "@/features/authServices/authorization";
-import {registration} from "@/features/authServices/registration";
-import {logout} from "@/features/authServices/logout";
-import {authCheck} from "@/features/authServices/authCheck";
+import {authorization} from "@/features/auth/authorization/authorization";
+import {registration} from "@/features/auth/register/registration";
+import {logout} from "@/features/auth/logout/logout";
+import {authCheck} from "@/features/auth/auth-check/authCheck";
 import IResponse from "@/shared/types/iResponse";
 
 class user {

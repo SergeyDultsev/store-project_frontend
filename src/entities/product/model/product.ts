@@ -1,9 +1,9 @@
 import {action, makeAutoObservable, toJS} from "mobx";
-import IProduct from "@/shared/types/product/iProduct";
-import {getProducts} from "@/features/productServices/getProducts";
+import IProduct from "@/entities/product/model/types/iProduct";
+import {getProducts} from "@/features/product/get-product/getProducts";
 import cart from '@/entities/cart/model/cart';
 import IResponse from "@/shared/types/iResponse";
-import ICartProduct from "@/entities/cart/model/types/cart/iCartProduct";
+import ICartProduct from "@/entities/cart/model/types/iCartProduct";
 
 class product{
     productData: IProduct[] = [];

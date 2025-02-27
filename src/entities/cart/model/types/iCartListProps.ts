@@ -1,4 +1,4 @@
-import ICartProduct from "@/entities/cart/model/types/cart/iCartProduct";
+import ICartProduct from "@/entities/cart/model/types/iCartProduct";
 
 interface ICartListProps {
     product: ICartProduct[];

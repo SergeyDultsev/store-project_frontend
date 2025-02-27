@@ -1,7 +1,7 @@
-import IOrderProduct from "@/entities/order/model/types/order/iOrderProduct";
+import IOrderProduct from "@/entities/order/model/types/iOrderProduct";
 import {action, makeAutoObservable, toJS} from "mobx";
-import {getOrders} from "@/features/orderServices/getOrders";
-import {setOrders} from "@/features/orderServices/setOrders";
+import {getOrders} from "@/features/order/get-order/getOrders";
+import {setOrders} from "@/features/order/set-order/setOrders";
 import cart from "@/entities/cart/model/cart";
 import IResponse from "@/shared/types/iResponse";
 

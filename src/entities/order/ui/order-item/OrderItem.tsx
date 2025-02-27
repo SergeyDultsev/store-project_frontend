@@ -3,7 +3,7 @@
 import styles from './OrderItem.module.scss';
 import {observer} from "mobx-react-lite";
 import React from "react";
-import IOrderItemProps from "@/entities/order/model/types/order/iOrderItemProps";
+import IOrderItemProps from "@/entities/order/model/types/iOrderItemProps";
 
 const OrderItem: React.FC<IOrderItemProps> = observer(({product}) => {
     return (

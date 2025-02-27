@@ -1,16 +1,20 @@
 'use client'
 
-import styles from './ProductItem.module.scss';
-import {observer} from "mobx-react-lite";
 import React from "react";
-import IProductItemProps from '@/shared/types/product/iProductItemProps'
+import {observer} from "mobx-react-lite";
+import {useRouter} from "next/navigation";
+import IProductItemProps from '@/entities/product/model/types/iProductItemProps';
+import ICartProduct from "@/entities/cart/model/types/iCartProduct";
+import styles from './ProductItem.module.scss';
 import BtnApp from "@/shared/ui/button/btnApp";
 import cart from "@/entities/cart/model/cart";
-import ICartProduct from "@/entities/cart/model/types/cart/iCartProduct";
+import user from "@/entities/user/user";
 
-const ProductItem: React.FC<IProductItemProps> = observer(({product }) => {
+const ProductItem: React.FC<IProductItemProps> = observer(({ product }) => {
+    const router =  useRouter();
+
     const handleSetProduct = (): void  => {
-        cart.setProductInCart(product);
+        user.isAuth === false ? router.push('/login') : cart.setProductInCart(product);
     }
 
     const handleDeleteProduct = (): void => {
@@ -18,7 +22,7 @@ const ProductItem: React.FC<IProductItemProps> = observer(({product }) => {
             (item: ICartProduct): boolean => product.product_id === item.product_id
         );
 
-        cart.deleteProductInCart(cartItem.cart_id);
+        if(cartItem) cart.deleteProductInCart(cartItem.cart_id);
     }
 
     return (

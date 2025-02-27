@@ -1,10 +1,10 @@
 import {makeAutoObservable, runInAction, toJS} from "mobx";
-import ICartProduct from "@/entities/cart/model/types/cart/iCartProduct";
+import ICartProduct from "@/entities/cart/model/types/iCartProduct";
 import product from "@/entities/product/model/product";
-import {getCart} from "@/features/cartServices/getCart";
-import {deleteCartItem} from "@/features/cartServices/deleteCartItem";
-import {setCartItem} from "@/features/cartServices/setCartItem";
-import {setQuantity} from "@/features/cartServices/setQuantity";
+import {getCart} from "@/features/cart/get-cart/getCart";
+import {deleteCartItem} from "@/features/cart/remove-cart/deleteCartItem";
+import {setCartItem} from "@/features/cart/set-cart-item/setCartItem";
+import {setQuantity} from "@/features/cart/set-cart-quantity/setQuantity";
 
 class cart{
     cartData: ICartProduct[] = [];

@@ -1,4 +1,4 @@
-import IOrderProduct from "@/entities/order/model/types/order/iOrderProduct";
+import IOrderProduct from "@/entities/order/model/types/iOrderProduct";
 
 interface IOrderItemProps{
     product: IOrderProduct;
