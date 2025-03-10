@@ -1,4 +1,4 @@
-import {makeAutoObservable, runInAction, toJS} from "mobx";
+import {action, makeAutoObservable, runInAction, toJS} from "mobx";
 import ICartProduct from "@/entities/cart/model/types/iCartProduct";
 import product from "@/entities/product/model/product";
 import {getCart} from "@/features/cart/get-cart/getCart";
@@ -6,13 +6,24 @@ import {deleteCartItem} from "@/features/cart/remove-cart/deleteCartItem";
 import {setCartItem} from "@/features/cart/set-cart-item/setCartItem";
 import {setQuantity} from "@/features/cart/set-cart-quantity/setQuantity";
 
-class cart{
+class Сart{
     cartData: ICartProduct[] = [];
     totalPrice: number = 0;
     countProducts: number = 0;
 
     constructor() {
-        makeAutoObservable(this);
+        makeAutoObservable(this, {
+            getCartProducts: action,
+            setCart: action,
+            setProductInCart: action,
+            deleteProductInCart: action,
+            getQuantityProduct: action,
+            getTotalPrice: action,
+            incrementQuantity: action,
+            decrementQuantity: action,
+            calculateCart: action,
+            cleanCart: action
+        });
     }
 
     /*
@@ -110,8 +121,10 @@ class cart{
         if(cartItem){
             const response = await setQuantity(cartId, 1);
             if(response && response.status === 200){
-                cartItem.quantity += 1;
-                this.calculateCart();
+                runInAction(() => {
+                    cartItem.quantity += 1;
+                    this.calculateCart();
+                })
             }
         }
     }
@@ -129,14 +142,17 @@ class cart{
         if(cartItem.quantity > 1) {
             const response = await setQuantity(cartId, -1);
             if (response && response.status === 200){
-                cartItem.quantity -= 1;
-                this.calculateCart();
+                runInAction(() => {
+                    cartItem.quantity -= 1;
+                    this.calculateCart();
+                })
             }
         } else {
-            this.deleteProductInCart(cartId);
+            runInAction(() => {
+                this.deleteProductInCart(cartId);
+                this.calculateCart();
+            })
         }
-
-        this.calculateCart();
     }
 
     /*
@@ -155,6 +171,7 @@ class cart{
         this.countProducts= 0;
 
         this.cartData.forEach((item: ICartProduct) => {
+            product.resetStatus(item.product_id);
             this.deleteProductInCart(item.cart_id);
         })
 
@@ -162,4 +179,4 @@ class cart{
     }
 }
 
-export default new cart;
+export default new Сart;

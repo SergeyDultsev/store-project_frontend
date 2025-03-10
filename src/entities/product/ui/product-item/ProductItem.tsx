@@ -28,8 +28,16 @@ const ProductItem: React.FC<IProductItemProps> = observer(({ product }) => {
     return (
         <article className={styles['product-item']}>
             <div className={styles['product-item__left']}>
-                <h2 className={styles['product-item__title']}>{product.product_name}</h2>
-                <p className={styles['product-item__info']}>Цена: {product.product_price} руб.</p>
+                {product.image_url && <img
+                    className={styles['product-item__image']}
+                    src={product.image_url}
+                    alt={product.product_name}
+                    loading="lazy"
+                />}
+                <div className={styles['product-item__left-content']}>
+                    <h2 className={styles['product-item__title']}>{product.product_name}</h2>
+                    <p className={styles['product-item__info']}>Цена: {product.product_price} руб.</p>
+                </div>
             </div>
 
             <div className={styles['product-item__right']}>

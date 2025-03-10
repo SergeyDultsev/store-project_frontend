@@ -31,6 +31,9 @@ class product{
         this.productData = products;
     }
 
+    /*
+         Изменение статуса продукта при добавлении/удалении из корзины
+     */
     changeStateProduct(productId: string): null|undefined{
         const productItem: IProduct | undefined = this.productData.find((item : IProduct): boolean => item.product_id === productId);
         if(!productItem) return null;
@@ -47,6 +50,17 @@ class product{
             return {...product, product_state: inCart ? 'in_cart' : product.product_state};
         }));
         this.setProduct(updateProductData);
+    }
+
+    /*
+        Сброс статуса после покупки
+    */
+    resetStatus(productId: string): void{
+        this.productData.forEach((item: IProduct) => {
+            if (productId === item.product_id) {
+                item.product_state = 'available';
+            }
+        });
     }
 }
 

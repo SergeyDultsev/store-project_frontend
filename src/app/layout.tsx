@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${onestSans.className}`}>
         <section className="app-wrapper">
-          <HeaderApp></HeaderApp>
+          <HeaderApp/>
           {children}
         </section>
       </body>

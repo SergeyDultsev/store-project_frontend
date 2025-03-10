@@ -7,7 +7,7 @@ import BtnApp from "@/shared/ui/button/btnApp";
 import cart from "@/entities/cart/model/cart";
 import ICartItemProps from "@/entities/cart/model/types/iCartItemProps";
 
-const ArtItem: React.FC<ICartItemProps> = observer(({product}) => {
+const СartItem: React.FC<ICartItemProps> = observer(({product}) => {
     const handleDeleteProduct = () => {
         cart.deleteProductInCart(product.cart_id)
     }
@@ -23,8 +23,16 @@ const ArtItem: React.FC<ICartItemProps> = observer(({product}) => {
     return (
         <article className={styles['cart-item']}>
             <div className={styles['cart-item__left']}>
-                <h2 className={styles['cart-item__title']}>{product.product_name}</h2>
-                <p className={styles['cart-item__info']}>Цена: {product.product_price} руб.</p>
+                {product.image_url && <img
+                    className={styles['cart-item__image']}
+                    src={product.image_url}
+                    alt={product.product_name}
+                    loading="lazy"
+                />}
+                <div className={styles['cart-item__left-content']}>
+                    <h2 className={styles['cart-item__title']}>{product.product_name}</h2>
+                    <p className={styles['cart-item__info']}>Цена: {product.product_price} руб.</p>
+                </div>
             </div>
             <div className={styles['cart-item__right']}>
                 <BtnApp text={"+"} type={"button"} onClick={handleIncrementQuantity}/>
@@ -36,4 +44,4 @@ const ArtItem: React.FC<ICartItemProps> = observer(({product}) => {
     )
 });
 
-export default ArtItem;
+export default СartItem;

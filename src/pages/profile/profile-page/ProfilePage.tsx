@@ -1,3 +1,5 @@
+'use client'
+
 import {useEffect, useLayoutEffect} from "react";
 import {redirect} from "next/navigation";
 import OrderList from "@/widgets/order-list/OrderList";
@@ -18,7 +20,12 @@ export default function ProfilePage() {
 
     return (
         <main>
-            <OrderList/>
+            {order.orderData.length === 0 && (
+                <h2 className={"alert"}>Товаров нету</h2>
+            )}
+            {order.orderData.length > 0 && (
+                <OrderList/>
+            )}
         </main>
     );
 }

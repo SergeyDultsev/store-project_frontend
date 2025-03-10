@@ -4,6 +4,7 @@ interface ICartProduct {
     product_name: string;
     product_price: number;
     state: 'in_cart';
+    image_url: string;
     quantity: number;
 }
 

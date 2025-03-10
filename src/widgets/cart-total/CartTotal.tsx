@@ -1,7 +1,6 @@
 'use client'
 
 import styles from './CartTotal.module.scss';
-
 import {observer} from "mobx-react-lite";
 import React from "react";
 import cart from "@/entities/cart/model/cart";
