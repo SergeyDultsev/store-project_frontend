@@ -7,11 +7,10 @@ import product from "@/entities/product/model/product";
 import Cookies from "js-cookie";
 
 export default function HomePage() {
-
-    useEffect(() => {
-        const token = Cookies.get("auth_token");
+    useEffect((): void => {
+        const token: string | undefined = Cookies.get("auth_token");
         if (!token) return;
-        const response = user.authorizationCheck();
+        const response: Promise<void> = user.authorizationCheck();
         if (!response) Cookies.remove("auth_token");
     }, []);
 

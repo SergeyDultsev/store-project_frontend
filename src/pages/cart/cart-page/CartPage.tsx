@@ -7,7 +7,6 @@ import user from "@/entities/user/user";
 import cart from "@/entities/cart/model/cart";
 import CartList from "@/widgets/cart-list/CartList";
 import CartTotal from "@/widgets/cart-total/CartTotal";
-import order from "@/entities/order/model/order";
 
 export default function CartPage() {
     useLayoutEffect(() => {

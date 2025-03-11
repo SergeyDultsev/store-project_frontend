@@ -7,6 +7,9 @@ import ICartProduct from "@/entities/cart/model/types/iCartProduct";
 
 class product{
     productData: IProduct[] = [];
+    lastId: string | null = null;
+    isLoading: boolean = false;
+    hasMore: boolean = true;
 
     constructor() {
         makeAutoObservable(this, {
@@ -15,20 +18,32 @@ class product{
     }
 
     async getProducts(): Promise<null|undefined>  {
+        if(this.isLoading || !this.hasMore ) return;
+
+        this.isLoading = false;
         try {
             if (this.productData.length === 0) {
-                const response: IResponse<any> | null = await getProducts();
+                const response: IResponse<any> | null = await getProducts(this.lastId);
                 if (response && response.data) {
-                    this.compareCartAndProduct(toJS(response.data.products));
+                    let productsData = toJS(response.data.products);
+
+                    if(productsData.length !== 0){
+                        this.hasMore = false;
+                        return;
+                    }
+
+                    this.compareCartAndProduct(toJS(productsData));
                 }
             }
         } catch (error) {
             return null;
+        } finally {
+            this.isLoading = false;
         }
     }
 
-    setProduct(products: IProduct[]): void{
-        this.productData = products;
+    setProduct(products: IProduct[]): void {
+        this.productData = [...this.productData, ...products];
     }
 
     /*
