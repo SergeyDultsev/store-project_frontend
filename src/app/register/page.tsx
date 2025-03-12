@@ -1,11 +1,9 @@
 'use client'
 
-import RegisterForm from "@/widgets/registration/registerFrom";
+import RegisterPage from "@/pages/auth/register-page/RegisterPage";
 
 export default function Register() {
     return (
-        <main>
-            <RegisterForm></RegisterForm>
-        </main>
+        <RegisterPage/>
     );
 }

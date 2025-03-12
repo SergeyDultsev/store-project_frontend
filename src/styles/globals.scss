@@ -2,13 +2,18 @@
 @use "variables";
 
 .app-wrapper{
-  position: relative;
-  display: flex;
+  height: 100vh;
 }
 
 main{
-  padding: 20px 40px;
-  margin: 0 auto;
-  max-width: 1200px;
+  padding: 80px 0 80px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+}
+
+.alert{
+  font-size: 20px;
+  color: var(--main-color);
 }

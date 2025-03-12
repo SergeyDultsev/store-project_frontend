@@ -2,8 +2,8 @@ import React from "react";
 import styles from './btnApp.module.scss'
 
 type propsBtn = {
+    text?: string;
     type: "button" | "submit" | "reset";
-    text: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 

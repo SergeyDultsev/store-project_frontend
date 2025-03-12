@@ -1,12 +1,7 @@
-"use client";
+import HomePage from "@/pages/home/home-page/HomePage";
 
-import ProductList from "@/widgets/product-list/productList";
-import product from "@/entities/product/product";
-
-export default function Catalog() {
+export default function Home() {
     return (
-        <main>
-            <ProductList products={product.productData}/>
-        </main>
+        <HomePage/>
     );
 }
