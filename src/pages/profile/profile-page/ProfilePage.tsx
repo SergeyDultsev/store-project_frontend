@@ -1,22 +1,18 @@
 'use client'
 
-import {useEffect, useLayoutEffect} from "react";
+import {useLayoutEffect} from "react";
 import {redirect} from "next/navigation";
-import OrderList from "@/widgets/order-list/OrderList";
 import order from '@/entities/order/model/order';
 import user from "@/entities/user/user";
+import ProductList from "@/widgets/product-list/ProductList";
 
 export default function ProfilePage() {
-    useLayoutEffect(() => {
-        const isAuth = user.isAuth;
+    useLayoutEffect((): void => {
+        const isAuth: boolean = user.isAuth;
         if(!isAuth){
             redirect("/")
         }
     }, [])
-
-    useEffect(() => {
-        order.getOrders();
-    }, []);
 
     return (
         <main>
@@ -24,7 +20,7 @@ export default function ProfilePage() {
                 <h2 className={"alert"}>Товаров нету</h2>
             )}
             {order.orderData.length > 0 && (
-                <OrderList/>
+                <ProductList orderData={order.orderData} type={"order"}/>
             )}
         </main>
     );

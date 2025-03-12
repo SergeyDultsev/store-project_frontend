@@ -1,11 +1,9 @@
-interface ICartProduct {
+import IProduct from "@/entities/product/model/types/iProduct";
+
+interface ICartProduct extends IProduct{
     cart_id: string;
-    product_id: string;
-    product_name: string;
-    product_price: number;
-    state: 'in_cart';
-    image_url: string;
-    quantity: number;
+    product_state: 'in_cart';
+    quantity: number
 }
 
 export default ICartProduct;

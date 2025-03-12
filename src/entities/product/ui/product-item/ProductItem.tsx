@@ -1,22 +1,28 @@
 'use client'
 
 import React from "react";
+import styles from './ProductItem.module.scss';
 import {observer} from "mobx-react-lite";
 import {useRouter} from "next/navigation";
-import IProductItemProps from '@/entities/product/model/types/iProductItemProps';
 import ICartProduct from "@/entities/cart/model/types/iCartProduct";
-import styles from './ProductItem.module.scss';
+import IProduct from "@/entities/product/model/types/iProduct";
 import BtnApp from "@/shared/ui/button/btnApp";
 import cart from "@/entities/cart/model/cart";
 import user from "@/entities/user/user";
 
+interface IProductItemProps {
+    product: IProduct;
+}
+
 const ProductItem: React.FC<IProductItemProps> = observer(({ product }) => {
     const router =  useRouter();
 
+    // Добавление в коризину
     const handleSetProduct = (): void  => {
-        user.isAuth === false ? router.push('/login') : cart.setProductInCart(product);
+        !user.isAuth ? router.push('/login') : cart.setProductInCart(product);
     }
 
+    // Удаление из коризины
     const handleDeleteProduct = (): void => {
         const cartItem: ICartProduct | undefined = cart.cartData.find(
             (item: ICartProduct): boolean => product.product_id === item.product_id

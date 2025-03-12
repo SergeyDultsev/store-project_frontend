@@ -5,10 +5,11 @@ import styles from './CartPage.module.scss';
 import {redirect} from "next/navigation";
 import user from "@/entities/user/user";
 import cart from "@/entities/cart/model/cart";
-import CartList from "@/widgets/cart-list/CartList";
 import CartTotal from "@/widgets/cart-total/CartTotal";
+import ProductList from "@/widgets/product-list/ProductList";
+import {observer} from "mobx-react-lite";
 
-export default function CartPage() {
+export default observer(function CartPage() {
     useLayoutEffect(() => {
         const isAuth = user.isAuth;
         if(!isAuth){
@@ -16,7 +17,7 @@ export default function CartPage() {
         }
     }, [])
 
-    useEffect(() => {
+    useEffect((): void  => {
         cart.getCartProducts();
         cart.getTotalPrice();
         cart.getQuantityProduct();
@@ -32,9 +33,9 @@ export default function CartPage() {
                     <div className={styles['cart-total__block']}>
                         <CartTotal/>
                     </div>
-                    <CartList/>
+                    <ProductList cartData={cart.cartData} type={"cart"}/>
                 </section>
             )}
         </main>
     );
-}
+});

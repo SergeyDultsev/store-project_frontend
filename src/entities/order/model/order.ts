@@ -7,22 +7,37 @@ import IResponse from "@/shared/types/iResponse";
 
 class order{
     orderData: IOrderProduct[] = [];
+    orderProductLastId: string | null = null;
+    isLoading: boolean = false;
+    hasMore: boolean = true;
 
     constructor() {
         makeAutoObservable(this, {
             getOrders: action,
+            setOrders: action
         });
     }
 
+    // Получение заказа
     async getOrders(): Promise<null|undefined>{
         try{
-            const response: IResponse<any> | null = await getOrders();
-            if(response && response.data) this.orderData = response.data.order;
+            const response: IResponse<any> | null = await getOrders(this.orderProductLastId);
+            if(response && response.data) {
+                const orderData = toJS(response.data.order);
+                const lastId = toJS(response.data.next_page);
+                this.orderData = orderData;
+
+                this.hasMore = !!lastId;
+                this.orderProductLastId = toJS(response.data.next_page);
+            }
         } catch (error){
             return null;
+        } finally {
+            this.isLoading = false;
         }
     }
 
+    // Оформление заказа
     async setOrders(): Promise<null|undefined> {
         try {
             if(cart.cartData.length !== 0) {
@@ -35,6 +50,11 @@ class order{
         } catch (error) {
             return null;
         }
+    }
+
+    // Обнуление заказов
+    cleanOrder(): void {
+        this.orderData = [];
     }
 }
 

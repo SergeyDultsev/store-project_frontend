@@ -1,9 +1,11 @@
 import ApiStore from "@/shared/api/apiStore";
 import Cookies from "js-cookie";
 import iCartProduct from "@/entities/cart/model/types/iCartProduct";
+import IResponse from "@/shared/types/iResponse";
 
-export async function setOrders(order: iCartProduct[]){
-    const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/order/`;
+const API_URL = `${process.env.NEXT_PUBLIC_API_URL}/order/`;
+
+export async function setOrders(order: iCartProduct[]): Promise<IResponse<any> | null>  {
     return await ApiStore.useApi(API_URL, {
         method: 'POST',
         headers: {

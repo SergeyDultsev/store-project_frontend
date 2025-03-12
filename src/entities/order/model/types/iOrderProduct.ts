@@ -1,10 +1,8 @@
-interface IOrderProduct{
-    "order_id": string,
-    "product_id": string,
-    "product_name": string,
-    "product_price": number,
-    image_url: string;
-    "quantity": number
+import IProduct from "@/entities/product/model/types/iProduct";
+
+interface IOrderProduct extends IProduct{
+    order_id: string,
+    quantity: number
 }
 
 export default IOrderProduct;

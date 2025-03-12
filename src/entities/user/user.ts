@@ -1,9 +1,13 @@
 import {makeAutoObservable, runInAction, action} from "mobx";
+import {redirect} from "next/navigation";
 import {authorization} from "@/features/auth/authorization/authorization";
 import {registration} from "@/features/auth/register/registration";
 import {logout} from "@/features/auth/logout/logout";
 import {authCheck} from "@/features/auth/auth-check/authCheck";
 import IResponse from "@/shared/types/iResponse";
+import product from "@/entities/product/model/product";
+import cart from "@/entities/cart/model/cart";
+import order from "@/entities/order/model/order";
 
 class user {
     // Общие стейты
@@ -102,6 +106,9 @@ class user {
                 });
                 this.clearErrorMessage();
                 this.clearAuthFormData();
+
+                product.compareCartAndProduct(product.productData);
+                redirect("/");
             } else {
                 this.isAuth = false;
                 this.clearAuthFormData();
@@ -113,10 +120,12 @@ class user {
     async isRegistration(tempName:string, tempEmail: string, tempPassword: string): Promise<void> {
         const response: IResponse<any> | null = await registration({ tempName, tempEmail, tempPassword });
 
-        runInAction(() => {
+        runInAction((): void => {
             if(response && response.status === 201){
                 this.clearRegisterFormData();
                 this.clearErrorMessage();
+
+                redirect("/login");
             } else {
                 this.clearRegisterFormData();
                 this.setErrorMessage("Error");
@@ -135,6 +144,8 @@ class user {
                 this.isAuth = false;
                 this.setErrorMessage("Error");
             }
+
+            this.resetAccount();
         });
     }
 
@@ -150,6 +161,12 @@ class user {
                 this.setErrorMessage("Error");
             }
         });
+    }
+
+    // Обнуление корзины и заказов выхода
+    resetAccount(): void {
+        cart.cleanCart();
+        order.cleanOrder();
     }
 }
 
